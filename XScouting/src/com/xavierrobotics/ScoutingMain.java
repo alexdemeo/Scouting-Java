@@ -23,7 +23,7 @@ public class ScoutingMain {
 
 	public static String directoryPath = null;
 
-	private static boolean debug = false;
+	private static boolean debug = true;
 	public static void main(String[] args) {
 		directoryPath = debug ? "/Users/alexdemeo/Desktop/Scout/" : args[0] + "/";
 		Util.init();
@@ -54,10 +54,11 @@ public class ScoutingMain {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		Integer teamNum = intFromNSObject(keys.get(Strings.ID_teamNum));
+		/*Integer teamNum = intFromNSObject(keys.get(Strings.ID_teamNum));
 		String teamColor = stringFromNSObject(keys.get(Strings.ID_teamColor));
-		String date = stringFromNSObject(keys.get(Strings.ID_date));
-		teams.add(new Team(teamNum, teamColor, date));
+		String date = stringFromNSObject(keys.get(Strings.ID_date));*/
+		
+		teams.add(null);
 
 	}
 
