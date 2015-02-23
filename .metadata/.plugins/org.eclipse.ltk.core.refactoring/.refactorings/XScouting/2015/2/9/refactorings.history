@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.xavierrobotics.Util&apos; to &apos;TeamUtils&apos;&#x0A;- Original project: &apos;XScouting&apos;&#x0A;- Original element: &apos;com.xavierrobotics.Util&apos;&#x0A;- Renamed element: &apos;com.xavierrobotics.TeamUtils&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Util&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;com.xavierrobotics{Util.java[Util" matchStrategy="1" name="TeamUtils" qualified="false" references="true" similarDeclarations="false" stamp="1424626082200" textual="false" version="1.0"/>
+</session>

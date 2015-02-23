@@ -1,0 +1,26 @@
+package com.xavierrobotics;
+
+import java.util.HashMap;
+
+import com.dd.plist.NSObject;
+
+import static com.xavierrobotics.DictionaryKeys.*;
+
+public class Excel {
+	@SuppressWarnings("unused")
+	private ScoutingMain instance;
+
+	public Excel(ScoutingMain instance) {
+		this.instance = instance;
+	}
+
+
+	public void evaluateDictionaries(String path) {
+		System.out.println("Beginning to write");
+		for (Team team : ScoutingMain.teams) {
+			HashMap<String, NSObject> keys = team.keys;
+			System.out.println("For team " + keys.get(KEY_TEAM_NUMBER) + " information is\n\t" + keys);
+
+		}
+	}
+}

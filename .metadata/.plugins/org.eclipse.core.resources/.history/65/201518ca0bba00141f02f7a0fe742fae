@@ -1,0 +1,33 @@
+package com.xavierrobotics;
+
+
+
+public class Team {
+	private int teamNum;
+	private String teamName;
+	private String location;
+	private String teamColor;
+	
+	public Team(int teamNum, String teamColor,  String date){
+		this.teamNum = teamNum;
+		this.teamName = Util.td.get(teamNum);
+		this.location = Util.ld.get(teamNum);
+		this.teamColor = teamColor;
+	}
+
+
+	public int getTeamNum() {
+		return teamNum;
+	}
+
+	public String getTeamName() {
+		return teamName;
+	}
+	
+	public String getLocation() {
+		return location;
+	}
+	public String getTeamColor() {
+		return teamColor;
+	}
+}

@@ -1,0 +1,10 @@
+package com.xavierrobotics;
+
+
+
+public class Team {
+
+	public Team(int teamNum, String teamColor,  String date){
+
+	}
+}

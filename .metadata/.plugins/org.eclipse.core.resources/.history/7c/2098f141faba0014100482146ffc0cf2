@@ -1,0 +1,41 @@
+package com.xavierrobotics;
+
+import java.util.HashMap;
+
+import com.dd.plist.NSObject;
+
+import static com.xavierrobotics.DictionaryKeys.*;
+
+public class Excel {
+	@SuppressWarnings("unused")
+	private ScoutingMain instance;
+
+	public Excel(ScoutingMain instance) {
+		this.instance = instance;
+	}
+
+
+	public void evaluateDictionaries(String path) {
+		System.out.println("\nBeginning to write...\n");
+		for (Team team : ScoutingMain.teams) {
+			HashMap<String, NSObject> keys = team.keys;
+			System.out.println("For team " + keys.get(KEY_TEAM_NUMBER) + " information is\n\t" + keys + "\n");
+			String teamColor = String.valueOf(keys.get(KEY_TEAM_COLOR));
+			//AUTONOMOUS VALUES
+			int aut_movesToAutozone = valueAt(keys, KEY_AUT_DOES_AUTOZONE);
+			int aut_movesToteToAutozone = valueAt(keys, KEY_AUT_YELLOW_TOTES_MOVED_TO_AUTOZONE);
+			int aut_totesStacked = valueAt(keys, KEY_AUT_DOES_STACK);
+			int aut_binsToAutozone = valueAt(keys, KEY_AUT_MOVES_BINTS_TO_AUTOZONE);
+			
+			int aut_SCORE = aut_movesToAutozone * 4 + aut_movesToteToAutozone * 6 + aut_totesStacked * 20 + aut_binsToAutozone * (3/8);
+			
+			//TELEOP VALUES
+			Integer teleop
+			
+		}
+	}
+	
+	private Integer valueAt(HashMap<String, NSObject> keys, String key) {
+		return Integer.parseInt(String.valueOf(keys.get(key)));
+	}
+}

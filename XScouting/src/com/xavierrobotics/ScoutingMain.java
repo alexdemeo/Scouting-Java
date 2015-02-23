@@ -2,6 +2,7 @@ package com.xavierrobotics;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.commons.io.FilenameUtils;
 
@@ -11,7 +12,6 @@ import com.dd.plist.PropertyListParser;
 
 public class ScoutingMain {
 	public static ScoutingMain instance = new ScoutingMain();
-	public static NSDictionary keys;
 
 	public static ArrayList<Team> teams = new ArrayList<>();
 	public String[] labels = {
@@ -26,7 +26,7 @@ public class ScoutingMain {
 	private static boolean debug = true;
 	public static void main(String[] args) {
 		directoryPath = debug ? "/Users/alexdemeo/Desktop/Scout/" : args[0] + "/";
-		Util.init();
+		TeamUtils.init();
 		instance.init();
 	}
 
@@ -37,28 +37,26 @@ public class ScoutingMain {
 		File[] directoryListing = dir.listFiles();
 		if (directoryListing != null) {
 			for (File child : directoryListing) {
-				System.out.println(child.getPath());
 				if (FilenameUtils.getExtension(child.getName()).equals("plist")) {
+					System.out.println(child.getPath());
 					addFile(child);
 				}
 			}
 		} else {
 			System.out.println("failed to load directory... yea this is an issue... *insert sad face here*");
 		}
-		new Excel(instance).writeToXls(dir.getPath());
+		new Excel(instance).evaluateDictionaries(dir.getPath());
 	}
 
+	@SuppressWarnings("unchecked")
 	public void addFile(File file) {
+		NSDictionary keys = null;
 		try {
 			keys = (NSDictionary) PropertyListParser.parse(file);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		/*Integer teamNum = intFromNSObject(keys.get(Strings.ID_teamNum));
-		String teamColor = stringFromNSObject(keys.get(Strings.ID_teamColor));
-		String date = stringFromNSObject(keys.get(Strings.ID_date));*/
-		
-		teams.add(null);
+		teams.add(new Team((HashMap<String, NSObject>)keys.toJavaObject()));
 
 	}
 
