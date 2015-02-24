@@ -1,7 +1,6 @@
 package org.fullmetalfalcons;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.apache.commons.io.FilenameUtils;
@@ -19,6 +18,7 @@ public class ScoutingMain {
 	public static void main(String[] args) {
 		directoryPath = debug ? "Scout" : args[0] + "/";
 		TeamUtils.init();
+		Excel.init();
 		instance.init();
 		Excel.export();
 	}

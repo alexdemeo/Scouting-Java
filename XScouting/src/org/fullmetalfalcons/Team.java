@@ -126,16 +126,131 @@ public class Team {
 	private int valueAt(String dictKey){
 		return Integer.parseInt(String.valueOf(keys.get(dictKey)));
 	}
-
+	
+	/**
+	 * @return The location of the team
+	 */
 	public String getLocation() {
 		return location;
 	}
 
+	/**
+	 * @return The name of the team
+	 */
 	public String getName() {
 		return name;
 	}
-
+	
+	/**
+	 * @return Get team number
+	 */
 	public int getNumber() {
 		return number;
+	}
+
+	/**
+	 * @return Whether or not the team has Scouting info registered
+	 */
+	public boolean hasData() {
+		return hasData;
+	}
+
+	/**
+	 * @return What color the team is using
+	 */
+	public AllianceColor getColor() {
+		return color;
+	}
+
+	public int getMatchNum() {
+		return matchNum;
+	}
+
+	public StartingPosition getStart() {
+		return start;
+	}
+
+	public int getAutoZone() {
+		return autoZone;
+	}
+
+	public int getToteInteraction() {
+		return toteInteraction;
+	}
+
+	public int getToteAutozone() {
+		return toteAutozone;
+	}
+
+	public int getBinAutozone() {
+		return binAutozone;
+	}
+
+	public int getStackSize() {
+		return stackSize;
+	}
+
+	public double getAutTotalScore() {
+		return autTotalScore;
+	}
+
+	public int getTotesScored() {
+		return totesScored;
+	}
+
+	public int getLitterScored() {
+		return litterScored;
+	}
+
+	public int getLitterStack() {
+		return litterStack;
+	}
+
+	public int getLitterLandfill() {
+		return litterLandfill;
+	}
+
+	public int getRecycleStack() {
+		return recycleStack;
+	}
+
+	public int getCoopPlatform() {
+		return coopPlatform;
+	}
+
+	public int getCoopStack() {
+		return coopStack;
+	}
+
+	public int getTotesKnocked() {
+		return totesKnocked;
+	}
+
+	public int getFouls() {
+		return fouls;
+	}
+
+	public int getTelTotalPoints() {
+		return telTotalPoints;
+	}
+
+	public double getTelTotalScore() {
+		return telTotalScore;
+	}
+
+	public int getHumanFouls() {
+		return humanFouls;
+	}
+
+	public int getHumanBins() {
+		return humanBins;
+	}
+
+	public int getHumanNoodles() {
+		return humanNoodles;
+	}
+
+	public int getHumanTotalScore() {
+		return humanTotalScore;
 	}
 }
