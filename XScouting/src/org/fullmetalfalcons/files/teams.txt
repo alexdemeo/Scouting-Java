@@ -1,0 +1,33 @@
+4557,Full Metal Falcons,Middletown CT
+78,AIR Strike,Newport County RI
+121,Rhode Warriors,Newport County RI
+125,NUTRONS,Boston MA
+155,The Technonuts,Berlin CT
+175,Buzz Robotics,Enfield CT
+178,The 2nd Law Enforcers,Farmington CT
+181,Birds of Prey,Hartford CT
+195,Cyber Knights,Southington CT
+228,GUS Robotics,Meriden CT
+230,Gaelhawks,Shelton CT
+236,Techno-Ticks,Old Lyme CT
+237,Black Magic Robots,Watertown CT
+558,Robo Squad,New Haven CT
+571,Team Paragon,Windsor CT
+1099,DiscoTechs,Brookfield CT
+1124,ÜberBots,Avon CT
+1699,Robocats,Colchester CT
+1991,Dragons,Hartford CT
+2064,The Panther Project,Soutbury/Middlebury CT
+2067,Apple Pi,Guilford CT
+2168,Aluminum Falcons,Groton CT
+2170,Titanium Tomahawks,Glastonbury CT
+2836,Team Beta ,Woodbury CT
+3182,Athena's Warriors,West Hartford CT
+3555,Aluminati,Storrs CT
+3634,Hard Botties,Bridgeport CT
+3654,TechTigers (Mercy),Middletown CT
+3718,Junkyard Battalion,New Britian CT
+3719,STEM Whalers,New London CT
+4055,Northwestern Robotic Gearheads,Winsted CT
+5142,Robo Dominators,Hamden CT
+5112,The Gongoliers,North Scituate RI
