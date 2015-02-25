@@ -1,20 +1,16 @@
 package org.fullmetalfalcons;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -27,22 +23,13 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class Excel {
 	
-	private static File file = new File("results.xlsx");
 	private static XSSFWorkbook workbook;
 	private static Sheet sheet;
 	
 	public static void init(){
-		if (file.exists()){
-			try {
-				workbook = (XSSFWorkbook) WorkbookFactory.create(new FileInputStream(file));
-				sheet = workbook.getSheet("Results");
-			} catch (InvalidFormatException | IOException e) {
-				e.printStackTrace();
-			}
-		} else {
-			setupWorkbook();
-		}
+		setupWorkbook();
 	}
+	
 	
 	/**
 	 * Sets up workbook based on the sections.txt and headers.txt files
@@ -50,6 +37,8 @@ public class Excel {
 	 * cells above it
 	 * 
 	 * Don't touch
+	 * 
+	 * Seriously don't touch it
 	 */
 	public static void setupWorkbook(){
 		workbook = new XSSFWorkbook();
