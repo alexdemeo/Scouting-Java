@@ -58,14 +58,17 @@ public class ScoutingMain {
 		
 		int number =Integer.parseInt(String.valueOf(keys.get(DictionaryKeys.KEY_TEAM_NUMBER)));
 		
-		//Get the team by its number then pass it the value
-		try{
-			TeamUtils.TEAMS.get(number).setKeys((HashMap<String, NSObject>)keys.toJavaObject());
-		} catch (NullPointerException e){
-			//if the team number is not in the list
-			System.out.println("Team number " + number + " is not in our directory, creating a blank one");
-			TeamUtils.TEAMS.put(number, new Team(number,null,null));
-			TeamUtils.TEAMS.get(number).setKeys((HashMap<String, NSObject>)keys.toJavaObject());
+		//Dirty Dirty code
+		if (TeamUtils.TEAM_INFO.containsKey(number)){
+			Team oldTeam = TeamUtils.TEAM_INFO.get(number);
+			Team newTeam = new Team(oldTeam.getNumber(),oldTeam.getName(),oldTeam.getLocation());
+			newTeam.setKeys((HashMap<String, NSObject>)keys.toJavaObject());
+			TeamUtils.TEAMS.add(newTeam);
+		} else {
+			Team newTeam = new Team(number,null,null);
+			newTeam.setKeys((HashMap<String, NSObject>)keys.toJavaObject());
+			TeamUtils.TEAMS.add(newTeam);
+
 		}
 		
 		System.out.println("Team " + number + " loaded successfully");

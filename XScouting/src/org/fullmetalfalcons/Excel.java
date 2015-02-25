@@ -117,7 +117,7 @@ public class Excel {
 		CellStyle sectionEnd = workbook.createCellStyle();
 		sectionEnd.setBorderRight(CellStyle.BORDER_THIN);
 		int cellnum;
-		for (Team t: TeamUtils.TEAMS.values()){
+		for (Team t: TeamUtils.TEAMS){
 			cellnum = 0;
 			if (t.hasData()){
 				
