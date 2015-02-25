@@ -38,7 +38,6 @@ public class ScoutingMain {
 		} else {
 			System.out.println("failed to load directory... yea this is an issue... *insert sad face here*");
 		}
-		//new Excel(instance).evaluateDictionaries(dir.getPath());
 	}
 
 	@SuppressWarnings("unchecked")

@@ -1,0 +1,28 @@
+Team Number
+Team Name
+Team Location
+Match Number
+!Alliance Color
+Starting Position
+Robot Makes It To AutoZone
+Yellow Totes Interacted With
+Yellow Totes in AutoZone
+Bins in AutoZone
+!Bin Stack Size
+Totes Scored
+Litter Bins Stored
+Highest Litter Stack
+Litter in Landfill
+Recycle Bin Stack Size
+Cooperation Sets on Platform
+Cooperation Sets Stacked
+Totes Knocked Over
+Number of Fouls
+!Total Points
+Number of Fouls
+Bins on the Field
+!Successful Noodle Throws
+Auto Score
+Teleop Score
+Human Score
+!Overall Score

@@ -4,8 +4,12 @@
 <dict>
 	<key>aut_does_autozone</key>
 	<integer>2</integer>
+  <key>teleop_litterbins_scored</key>
+	<integer>3</integer>
 	<key>aut_moves_bins_to_autozone</key>
 	<integer>3</integer>
+  <key>match_number</key>
+	<integer>17</integer>
 	<key>aut_stacks</key>
 	<integer>0</integer>
 	<key>aut_start_pos</key>

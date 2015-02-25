@@ -40,7 +40,9 @@ public class Team {
 	private int litterStack;
 	private int litterLandfill;
 	private int recycleStack;
+	//4 is t/f
 	private int coopPlatform;
+	//2 is t/f
 	private int coopStack;
 	private int totesKnocked;
 	private int fouls;
@@ -78,7 +80,7 @@ public class Team {
 		if (number==0){
 			number = valueAt(KEY_TEAM_NUMBER);
 		}
-		//matchNum = valueAt(KEY_MATCH_NUMBER);
+		matchNum = valueAt(KEY_MATCH_NUMBER);
 		
 		
 		start = StartingPosition.getPosition(valueAt(KEY_AUT_STARTING_POSITION));
@@ -96,7 +98,7 @@ public class Team {
 		}
 		
 		totesScored = valueAt(KEY_TELEOP_TOTES_SCORED);
-		//litterScored = valueAt(KEY_TELEOP_LITTERBINS_SCORED);
+		litterScored = valueAt(KEY_TELEOP_LITTERBINS_SCORED);
 		litterStack = valueAt(KEY_TELEOP_LITTERBINS_HIGHESTSTACK);
 		litterLandfill = valueAt(KEY_TELEOP_LITTER_TO_LANDFULL);
 		recycleStack = valueAt(KEY_TELEOP_RECYCLINGBINS_STACKED);
@@ -158,16 +160,16 @@ public class Team {
 	/**
 	 * @return What color the team is using
 	 */
-	public AllianceColor getColor() {
-		return color;
+	public String getColor() {
+		return color.toString();
 	}
 
 	public int getMatchNum() {
 		return matchNum;
 	}
 
-	public StartingPosition getStart() {
-		return start;
+	public String getStart() {
+		return start.toString();
 	}
 
 	public int getAutoZone() {
