@@ -24,7 +24,7 @@ public class Team {
 	
 	//Autonomous
 	
-	private StartingPosition start;
+	private int start;
 	//2=tried but Failed
 	private int autoZone;
 	private int toteInteraction;
@@ -39,12 +39,14 @@ public class Team {
 	private int litterScored;
 	private int litterStack;
 	private int litterLandfill;
+	private int unprocessedLitter;
 	private int recycleStack;
 	//4 is t/f
 	private int coopPlatform;
 	//2 is t/f
 	private int coopStack;
 	private int totesKnocked;
+	private int canNoodles;
 	private int fouls;
 	private int telTotalPoints;
 	private double telTotalScore;
@@ -53,8 +55,10 @@ public class Team {
 	
 	private int humanFouls;
 	private int humanBins;
-	private int humanNoodles;
-	private int humanTotalScore;
+	private int humanNoodlesOwn;
+	private int humanNoodlesOpponent;
+	private int humanNoodlesOther;
+	private double humanTotalScore;
 	
 	public HashMap<String, NSObject> keys;
 	
@@ -83,7 +87,7 @@ public class Team {
 		matchNum = valueAt(KEY_MATCH_NUMBER);
 		
 		
-		start = StartingPosition.getPosition(valueAt(KEY_AUT_STARTING_POSITION));
+		start = valueAt(KEY_AUT_STARTING_POSITION);
 		autoZone = valueAt(KEY_AUT_DOES_AUTOZONE);
 		toteInteraction = valueAt(KEY_AUT_YELLOW_TOTES_INTERACTED_WITH);
 		toteAutozone = valueAt(KEY_AUT_YELLOW_TOTES_MOVED_TO_AUTOZONE);
@@ -101,10 +105,12 @@ public class Team {
 		litterScored = valueAt(KEY_TELEOP_LITTERBINS_SCORED);
 		litterStack = valueAt(KEY_TELEOP_LITTERBINS_HIGHESTSTACK);
 		litterLandfill = valueAt(KEY_TELEOP_LITTER_TO_LANDFULL);
+		unprocessedLitter = valueAt(KEY_TELEOP_UNPROCESSED_LITTER);
 		recycleStack = valueAt(KEY_TELEOP_RECYCLINGBINS_STACKED);
 		coopPlatform = valueAt(KEY_TELEOP_COOPERTITION_SETSONPLATFORM);
 		coopStack = valueAt(KEY_TELEOP_COOPERTITION_STACKS_ATTEMPTEDMADE);
 		totesKnocked = valueAt(KEY_TELEOP_KNOCKED_TOTESSTACKS);
+		canNoodles = valueAt(KEY_TELEOP_CAN_RUNOVERNOODLES);
 		fouls = valueAt(KEY_TELEOP_TOTAL_FOULSAGAINST);
 		telTotalPoints = valueAt(KEY_TELEOP_TOTAL_POINTS);
 		
@@ -116,11 +122,12 @@ public class Team {
 		
 		humanFouls = valueAt(KEY_HUMAN_FOULSAGAINST);
 		humanBins = valueAt(KEY_HUMAN_BINSONFIELD);
-		humanNoodles = valueAt(KEY_HUMAN_NOODLES);
+		humanNoodlesOwn = valueAt(KEY_HUMAN_NOODLES_OWNLANDFILL);
+		humanNoodlesOpponent = valueAt(KEY_HUMAN_NOODLES_OPPLANDFILL);
+		humanNoodlesOther = valueAt(KEY_HUMAN_NOODLES_OTHER_SIDE);
 		
-		humanTotalScore =  humanNoodles * 4 +
-				humanBins * 2 -
-				humanFouls * 6;
+		//TODO human total score
+		humanTotalScore = 7.5;
 		
 		
 	}
@@ -168,12 +175,21 @@ public class Team {
 		return matchNum;
 	}
 
-	public String getStart() {
-		return start.toString();
+	public int getStart() {
+		return start;
 	}
 
-	public int getAutoZone() {
-		return autoZone;
+	public String getAutoZone() {
+		switch(autoZone){
+		case 0:
+			return "No";
+		case 1:
+			return "Yes";
+		case 2:
+			return "Tried but failed";
+		}
+		return null;
+
 	}
 
 	public int getToteInteraction() {
@@ -211,6 +227,10 @@ public class Team {
 	public int getLitterLandfill() {
 		return litterLandfill;
 	}
+	
+	public int getUnprocessedLitter(){
+		return unprocessedLitter;
+	}
 
 	public int getRecycleStack() {
 		return recycleStack;
@@ -222,6 +242,19 @@ public class Team {
 
 	public int getCoopStack() {
 		return coopStack;
+	}
+	
+	public String getCanNoodles(){
+		switch(canNoodles){
+		case 0:
+			return "No";
+		case 1:
+			return "Yes";
+		case 2:
+			return "Tried but failed";
+		}
+		
+		return null;
 	}
 
 	public int getTotesKnocked() {
@@ -248,11 +281,19 @@ public class Team {
 		return humanBins;
 	}
 
-	public int getHumanNoodles() {
-		return humanNoodles;
+	public int getHumanNoodlesOwn(){
+		return humanNoodlesOwn;
+	}
+	
+	public int getHumanNoodlesOpponent(){
+		return humanNoodlesOpponent;
+	}
+	
+	public int getHumanNoodlesOther(){
+		return humanNoodlesOther;
 	}
 
-	public int getHumanTotalScore() {
+	public double getHumanTotalScore() {
 		return humanTotalScore;
 	}
 }

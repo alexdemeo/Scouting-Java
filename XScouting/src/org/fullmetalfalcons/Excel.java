@@ -135,109 +135,119 @@ public class Excel {
 		Cell c;
 		CellStyle sectionEnd = workbook.createCellStyle();
 		sectionEnd.setBorderRight(CellStyle.BORDER_THIN);
-		
+		int cellnum;
 		for (Team t: TeamUtils.TEAMS.values()){
+			cellnum = 0;
 			if (t.hasData()){
 				r = sheet.createRow(rowNum);
-				c = r.createCell(0);
+				
+				c = r.createCell(cellnum++);
 				c.setCellValue(t.getNumber());
 				
-				c = r.createCell(1);
+				c = r.createCell(cellnum++);
 				if (t.getName()==null){
 					c.setCellValue("");
 				} else {
 					c.setCellValue(t.getName());
 				}
 				
-				c = r.createCell(2);
+				c = r.createCell(cellnum++);
 				if (t.getLocation()==null){
 					c.setCellValue("");
 				} else {
 					c.setCellValue(t.getLocation());
 				}
 				
-				c = r.createCell(3);
+				c = r.createCell(cellnum++);
 				c.setCellValue(t.getMatchNum());
 				
-				c = r.createCell(4);
+				c = r.createCell(cellnum++);
 				c.setCellValue(t.getColor());
 				c.setCellStyle(sectionEnd);
 				
-				c = r.createCell(5);
+				c = r.createCell(cellnum++);
 				c.setCellValue(t.getStart());
 				
-				c = r.createCell(6);
-				if (t.getAutoZone()==2){
-					c.setCellValue("Tried but failed");
-				} else {
-					c.setCellValue(t.getAutoZone());
-				}
-				
-				c = r.createCell(7);
-				c.setCellValue(t.getToteInteraction());
-				
-				c = r.createCell(8);
+				c = r.createCell(cellnum++);
 				c.setCellValue(t.getAutoZone());
 				
-				c = r.createCell(9);
+				c = r.createCell(cellnum++);
+				c.setCellValue(t.getToteInteraction());
+				
+				c = r.createCell(cellnum++);
+				c.setCellValue(t.getAutoZone());
+				
+				c = r.createCell(cellnum++);
 				c.setCellValue(t.getBinAutozone());
 				
-				c = r.createCell(10);
+				c = r.createCell(cellnum++);
 				c.setCellValue(t.getStackSize());
 				c.setCellStyle(sectionEnd);
 				
-				c = r.createCell(11);
+				c = r.createCell(cellnum++);
 				c.setCellValue(t.getTotesScored());
 				
-				c = r.createCell(12);
+				c = r.createCell(cellnum++);
 				c.setCellValue(t.getLitterScored());
 				
-				c = r.createCell(13);
+				c = r.createCell(cellnum++);
 				c.setCellValue(t.getLitterStack());
 				
-				c = r.createCell(14);
+				c = r.createCell(cellnum++);
 				c.setCellValue(t.getLitterLandfill());
 				
-				c = r.createCell(15);
+				c = r.createCell(cellnum++);
+				c.setCellValue(t.getUnprocessedLitter());
+				
+				c = r.createCell(cellnum++);
 				c.setCellValue(t.getRecycleStack());
 				
-				c = r.createCell(16);
+				c = r.createCell(cellnum++);
 				c.setCellValue(t.getCoopPlatform());
 				
-				c = r.createCell(17);
+				c = r.createCell(cellnum++);
 				c.setCellValue(t.getCoopStack());
 				
-				c = r.createCell(18);
+				c = r.createCell(cellnum++);
 				c.setCellValue(t.getTotesKnocked());
 				
-				c = r.createCell(19);
+				c = r.createCell(cellnum++);
+				c.setCellValue(t.getCanNoodles());
+				
+				c = r.createCell(cellnum++);
 				c.setCellValue(t.getFouls());
 				
-				c = r.createCell(20);
+				c = r.createCell(cellnum++);
 				c.setCellValue(t.getTelTotalPoints());
 				c.setCellStyle(sectionEnd);
 				
-				c = r.createCell(21);
+				c = r.createCell(cellnum++);
 				c.setCellValue(t.getHumanFouls());
 				
-				c = r.createCell(22);
+				c = r.createCell(cellnum++);
 				c.setCellValue(t.getHumanBins());
 				
-				c = r.createCell(23);
-				c.setCellValue(t.getHumanNoodles());
+				c = r.createCell(cellnum++);
+				c.setCellValue(t.getHumanNoodlesOwn());
+				
+				c = r.createCell(cellnum++);
+				c.setCellValue(t.getHumanNoodlesOpponent());
+				
+				c = r.createCell(cellnum++);
+				c.setCellValue(t.getHumanNoodlesOther());
 				c.setCellStyle(sectionEnd);
 				
-				c = r.createCell(24);
+				c = r.createCell(cellnum++);
 				c.setCellValue(t.getAutTotalScore());
 				
-				c = r.createCell(25);
+				c = r.createCell(cellnum++);
 				c.setCellValue(t.getTelTotalScore());
 				
-				c = r.createCell(26);
-				c.setCellValue(7.5);
+				c = r.createCell(cellnum++);
+				c.setCellValue(t.getHumanTotalScore());
 				
-				c = r.createCell(27);
-				c.setCellValue(t.getAutTotalScore()+t.getTelTotalScore());
+				c = r.createCell(cellnum++);
+				c.setCellValue(t.getAutTotalScore()+t.getTelTotalScore()+t.getHumanTotalScore());
 				c.setCellStyle(sectionEnd);
 				
 				rowNum++;
