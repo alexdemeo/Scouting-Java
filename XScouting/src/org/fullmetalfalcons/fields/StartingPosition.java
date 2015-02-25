@@ -1,5 +1,6 @@
 package org.fullmetalfalcons.fields;
 
+@Deprecated
 public enum StartingPosition {
 	S_PLATFORM("Starting Platform"),SZ_LEFT("Starting Zone Left"),SZ_CENTER("Starting Zone Center"),SZ_RIGHT("Starting Zone Right");
 	

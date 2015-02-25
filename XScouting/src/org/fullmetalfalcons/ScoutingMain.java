@@ -9,6 +9,13 @@ import com.dd.plist.NSDictionary;
 import com.dd.plist.NSObject;
 import com.dd.plist.PropertyListParser;
 
+/**
+ * Handles the flow of the program and loading the .plist files that contain the raw data
+ * 
+ * 
+ * @author Dan
+ * @author Demeo
+ */
 public class ScoutingMain {
 	public static ScoutingMain instance = new ScoutingMain();
 

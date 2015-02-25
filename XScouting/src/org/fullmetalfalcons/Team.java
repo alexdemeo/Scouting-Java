@@ -1,16 +1,47 @@
 package org.fullmetalfalcons;
 
+import static org.fullmetalfalcons.DictionaryKeys.KEY_AUT_DOES_AUTOZONE;
+import static org.fullmetalfalcons.DictionaryKeys.KEY_AUT_DOES_STACK;
+import static org.fullmetalfalcons.DictionaryKeys.KEY_AUT_MOVES_BINS_TO_AUTOZONE;
+import static org.fullmetalfalcons.DictionaryKeys.KEY_AUT_STARTING_POSITION;
+import static org.fullmetalfalcons.DictionaryKeys.KEY_AUT_YELLOW_TOTES_INTERACTED_WITH;
+import static org.fullmetalfalcons.DictionaryKeys.KEY_AUT_YELLOW_TOTES_MOVED_TO_AUTOZONE;
+import static org.fullmetalfalcons.DictionaryKeys.KEY_HUMAN_BINSONFIELD;
+import static org.fullmetalfalcons.DictionaryKeys.KEY_HUMAN_FOULSAGAINST;
+import static org.fullmetalfalcons.DictionaryKeys.KEY_HUMAN_NOODLES_OPPLANDFILL;
+import static org.fullmetalfalcons.DictionaryKeys.KEY_HUMAN_NOODLES_OTHER_SIDE;
+import static org.fullmetalfalcons.DictionaryKeys.KEY_HUMAN_NOODLES_OWNLANDFILL;
+import static org.fullmetalfalcons.DictionaryKeys.KEY_MATCH_NUMBER;
+import static org.fullmetalfalcons.DictionaryKeys.KEY_TEAM_COLOR;
+import static org.fullmetalfalcons.DictionaryKeys.KEY_TEAM_NUMBER;
+import static org.fullmetalfalcons.DictionaryKeys.KEY_TELEOP_CAN_RUNOVERNOODLES;
+import static org.fullmetalfalcons.DictionaryKeys.KEY_TELEOP_COOPERTITION_SETSONPLATFORM;
+import static org.fullmetalfalcons.DictionaryKeys.KEY_TELEOP_COOPERTITION_STACKS_ATTEMPTEDMADE;
+import static org.fullmetalfalcons.DictionaryKeys.KEY_TELEOP_KNOCKED_TOTESSTACKS;
+import static org.fullmetalfalcons.DictionaryKeys.KEY_TELEOP_LITTERBINS_HIGHESTSTACK;
+import static org.fullmetalfalcons.DictionaryKeys.KEY_TELEOP_LITTERBINS_SCORED;
+import static org.fullmetalfalcons.DictionaryKeys.KEY_TELEOP_LITTER_TO_LANDFULL;
+import static org.fullmetalfalcons.DictionaryKeys.KEY_TELEOP_RECYCLINGBINS_STACKED;
+import static org.fullmetalfalcons.DictionaryKeys.KEY_TELEOP_TOTAL_FOULSAGAINST;
+import static org.fullmetalfalcons.DictionaryKeys.KEY_TELEOP_TOTAL_POINTS;
+import static org.fullmetalfalcons.DictionaryKeys.KEY_TELEOP_TOTES_SCORED;
+import static org.fullmetalfalcons.DictionaryKeys.KEY_TELEOP_UNPROCESSED_LITTER;
+
 import java.util.HashMap;
 
-import static org.fullmetalfalcons.DictionaryKeys.*;
-
 import org.fullmetalfalcons.fields.AllianceColor;
-import org.fullmetalfalcons.fields.StartingPosition;
 
 import com.dd.plist.NSObject;
 
 
-
+/**
+ * I'd like to go on record saying I hate this class and everything in it.
+ * It's ugly, there are too many variables, there's so many better ways to do this,
+ * but I don't feel like rewriting everything right now.
+ * 
+ * @author Dan
+ *
+ */
 public class Team {
 	
 	private boolean hasData = false;

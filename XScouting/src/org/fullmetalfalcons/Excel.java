@@ -8,8 +8,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URISyntaxException;
-import java.util.List;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
@@ -22,9 +20,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
 /**
+ * Handles the setup and writing of the Excel workbook containing the results
  * 
  * @author Dan
- * @author Demooph
+ * 
  */
 public class Excel {
 	
@@ -45,6 +44,13 @@ public class Excel {
 		}
 	}
 	
+	/**
+	 * Sets up workbook based on the sections.txt and headers.txt files
+	 * Iterates along the headers and when it reaches one that starts with an !, it retroactively adds the next section in the 
+	 * cells above it
+	 * 
+	 * Don't touch
+	 */
 	public static void setupWorkbook(){
 		workbook = new XSSFWorkbook();
 		sheet = workbook.createSheet("Results");
@@ -110,17 +116,9 @@ public class Excel {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+	    write();
 		
-		try {
-		    FileOutputStream out = new FileOutputStream("results.xlsx");
-		    workbook.write(out);
-		    out.close();
-		} catch (FileNotFoundException ex) {
-			ex.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	    
 	}
 	
 	public static void export(){
@@ -133,6 +131,9 @@ public class Excel {
 		for (Team t: TeamUtils.TEAMS.values()){
 			cellnum = 0;
 			if (t.hasData()){
+				
+				//The following code is abysmal, however I don't feel like rewriting the entire team class
+				//TODO stop being lazy
 				r = sheet.createRow(rowNum);
 				
 				c = r.createCell(cellnum++);
@@ -248,11 +249,18 @@ public class Excel {
 			}
 		}
 		
+		write();
 		
-		
+	}
+	
+	
+	/**
+	 * Writes the excel workbook out to "results.xlsx" in the Directory specified
+	 */
+	private static void write(){
 		
 		try {
-		    FileOutputStream out = new FileOutputStream("results.xlsx");
+		    FileOutputStream out = new FileOutputStream(ScoutingMain.directoryPath + "/results.xlsx");
 		    workbook.write(out);
 		    out.close();
 		} catch (FileNotFoundException ex) {
