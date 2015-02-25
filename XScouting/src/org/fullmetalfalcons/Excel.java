@@ -1,13 +1,14 @@
 package org.fullmetalfalcons;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Files;
 import java.util.List;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -66,23 +67,19 @@ public class Excel {
 		Cell topCell;
 		Cell bottomCell;
 		
-		//Locate the headers list
-		URL headingsUrl=Excel.class.getResource("/org/fullmetalfalcons/files/headings.txt");
-		//locate the sections list
-		URL sectionsUrl = Excel.class.getResource("/org/fullmetalfalcons/files/sections.txt");
-		try {
-			File headingsFile=new File(headingsUrl.toURI());
-			File sectionsFile = new File(sectionsUrl.toURI());
-			//Get a list of the sections
-			List<String> sections = Files.readAllLines(sectionsFile.toPath());
+		try (InputStream headIn = Excel.class.getResourceAsStream("/org/fullmetalfalcons/files/headings.txt");
+			BufferedReader headReader = new BufferedReader(new InputStreamReader(headIn));
+				InputStream sectionIn = Excel.class.getResourceAsStream("/org/fullmetalfalcons/files/sections.txt");
+				BufferedReader sectionReader = new BufferedReader(new InputStreamReader(sectionIn));
+				){
+			
 			//Current cell
 			int counter = 0;
-			//Current Section
-			int sectionNumber = 0;
 			//Column number where this section began
 			int lastSection = 0;
 			//For every header:
-			for (String header:Files.readAllLines(headingsFile.toPath())){
+			String header;
+			while ((header=headReader.readLine())!=null){
 				bottomCell = bottomRow.createCell(counter);
 				//If the line in the file starts with !
 				if (header.charAt(0)=='!'){
@@ -98,11 +95,10 @@ public class Excel {
 					
 					topCell = topRow.getCell(lastSection);
 					//set the section values to the correct value
-					topCell.setCellValue(sections.get(sectionNumber));
+					topCell.setCellValue(sectionReader.readLine());
 					//Merge the section labels
 					sheet.addMergedRegion(new CellRangeAddress(0,0,lastSection,counter));
 					
-					sectionNumber++;
 					lastSection = counter+1;
 					
 				} else {
@@ -111,8 +107,6 @@ public class Excel {
 				}
 				counter++;
 			}
-		} catch (URISyntaxException e1) {
-			e1.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -267,5 +261,6 @@ public class Excel {
 			e.printStackTrace();
 		}
 	}
+	
 
 }
