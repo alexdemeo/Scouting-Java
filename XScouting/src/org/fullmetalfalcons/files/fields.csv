@@ -1,0 +1,27 @@
+Starting Position,aut_start_pos,int,
+Robot Makes It To AutoZone,aut_does_autozone,trilean,Try/Fail
+Yellow Totes Interacted With,aut_yellow_totes_interacted_with,int,
+Yellow Totes in AutoZone,aut_yellow_totes_to_autozone,int,
+Bins in AutoZone,aut_moves_bins_to_autozone,int,
+!Bin Stack Size,aut_stacks,int-fail,3
+Totes Scored,teleop_totes_scored,int,
+Litter Bins Stored,teleop_litterbins_scored,int,
+Highest Litter Stack,teleop_litterbins_highstack,int,
+Litter in Landfill,teleop_littertolandfill,int,
+Unprocessed Litter,teleop_unprocessedlitter,int,
+Recycle Bin Stack Size,teleop_recyclingbins_stacked,int,
+Cooperation Sets on Platform,teleop_coop_setsonplatform,int-fail,4
+Cooperation Sets Stacked,teleop_coop_attemptmake,int-fail,2
+Totes Knocked Over,teleop_knocked_totesstacks,int,
+Can Run Over Noodles,teleop_noodles,trilean,Try/Fail
+Number of Fouls,teleop_foulsagainst,int,
+!Total Points,teleop_totalpoints,int,
+Number of Fouls,human_fouls,int,
+Bins on the Field,human_bins,int,
+Noodles in Own Landfill,human_noodles_own,int,
+Noodles in Opponent Landfil,human_noodles_opp,int,
+!Noodles on Other Side,human_noodles_other_side,int,
+Auto Score,,math,
+Teleop Score,,math,
+Human Score,,math,
+!Overall Score,,math,

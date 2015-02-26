@@ -13,6 +13,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.fullmetalfalcons.data.DataPoint;
+import org.fullmetalfalcons.teams.Team;
 
 
 /**
@@ -62,23 +64,53 @@ public class Excel {
 		Cell topCell;
 		Cell bottomCell;
 		
-		try (InputStream headIn = Excel.class.getResourceAsStream("/org/fullmetalfalcons/files/headings.txt");
-			BufferedReader headReader = new BufferedReader(new InputStreamReader(headIn));
+		try (
 				InputStream sectionIn = Excel.class.getResourceAsStream("/org/fullmetalfalcons/files/sections.txt");
 				BufferedReader sectionReader = new BufferedReader(new InputStreamReader(sectionIn));
 				){
-			
 			//Current cell
 			int counter = 0;
 			//Column number where this section began
 			int lastSection = 0;
+
+			
+			bottomCell = bottomRow.createCell(counter++);
+			bottomCell.setCellValue("Team Number");
+			bottomCell.setCellStyle(bottomLabel);
+			
+			bottomCell = bottomRow.createCell(counter++);
+			bottomCell.setCellValue("Team Name");
+			bottomCell.setCellStyle(bottomLabel);
+			
+			bottomCell = bottomRow.createCell(counter++);
+			bottomCell.setCellValue("Team Location");
+			bottomCell.setCellStyle(bottomLabel);
+			
+			bottomCell = bottomRow.createCell(counter++);
+			bottomCell.setCellValue("Match Number");
+			bottomCell.setCellStyle(bottomLabel);
+			
+			bottomCell = bottomRow.createCell(counter++);
+			bottomCell.setCellValue("Alliance Color");
+			bottomCell.setCellStyle(topLabel);
+			
+			for (int i = lastSection; i<=counter; i++){
+				topCell = topRow.createCell(i);
+				topCell.setCellStyle(topLabel);
+			}
+			
+			topCell = topRow.getCell(lastSection);
+			topCell.setCellValue("General");
+			sheet.addMergedRegion(new CellRangeAddress(0,0,lastSection,counter));
+			
+			lastSection = counter+1;
+			
 			//For every header:
-			String header;
-			while ((header=headReader.readLine())!=null){
+			for (DataPoint p: ScoutingMain.dataPoints){
 				bottomCell = bottomRow.createCell(counter);
 				//If the line in the file starts with !
-				if (header.charAt(0)=='!'){
-					bottomCell.setCellValue(header.substring(1));
+				if (p.getTitle().charAt(0)=='!'){
+					bottomCell.setCellValue(p.getTitle().substring(1));
 					//add a side border
 					bottomCell.setCellStyle(topLabel);
 					
@@ -97,7 +129,7 @@ public class Excel {
 					lastSection = counter+1;
 					
 				} else {
-					bottomCell.setCellValue(header);
+					bottomCell.setCellValue(p.getTitle());
 					bottomCell.setCellStyle(bottomLabel);
 				}
 				counter++;
@@ -119,123 +151,40 @@ public class Excel {
 		int cellnum;
 		for (Team t: TeamUtils.TEAMS){
 			cellnum = 0;
-			if (t.hasData()){
-				
-				//The following code is abysmal, however I don't feel like rewriting the entire team class
-				//TODO stop being lazy
-				r = sheet.createRow(rowNum);
-				
+			r = sheet.createRow(rowNum);
+			
+			//These 5 values will always be needed in competition, therefore they are manually added
+			
+			c = r.createCell(cellnum++);
+			c.setCellValue(t.getID().getNumber());
+			
+			c = r.createCell(cellnum++);
+			c.setCellValue(t.getID().getName());
+
+			c = r.createCell(cellnum++);
+			c.setCellValue(t.getID().getLocation());
+			
+			c = r.createCell(cellnum++);
+			c.setCellValue(Integer.parseInt(t.getDataAt("match_number")));
+			
+			c = r.createCell(cellnum++);
+			c.setCellValue(t.getDataAt("team_color"));
+			c.setCellStyle(sectionEnd);
+			
+			for (DataPoint p: ScoutingMain.dataPoints){
 				c = r.createCell(cellnum++);
-				c.setCellValue(t.getNumber());
-				
-				c = r.createCell(cellnum++);
-				if (t.getName()==null){
-					c.setCellValue("");
-				} else {
-					c.setCellValue(t.getName());
+				String value = p.parseData(t.getDataAt(p.getKey()),t);
+				try{
+					c.setCellValue(Double.parseDouble(value));
+				} catch(NumberFormatException e){
+					c.setCellValue(value);
 				}
-				
-				c = r.createCell(cellnum++);
-				if (t.getLocation()==null){
-					c.setCellValue("");
-				} else {
-					c.setCellValue(t.getLocation());
+				if (p.getTitle().charAt(0)=='!'){
+					c.setCellStyle(sectionEnd);
 				}
-				
-				c = r.createCell(cellnum++);
-				c.setCellValue(t.getMatchNum());
-				
-				c = r.createCell(cellnum++);
-				c.setCellValue(t.getColor());
-				c.setCellStyle(sectionEnd);
-				
-				c = r.createCell(cellnum++);
-				c.setCellValue(t.getStart());
-				
-				c = r.createCell(cellnum++);
-				c.setCellValue(t.getAutoZone());
-				
-				c = r.createCell(cellnum++);
-				c.setCellValue(t.getToteInteraction());
-				
-				c = r.createCell(cellnum++);
-				c.setCellValue(t.getAutoZone());
-				
-				c = r.createCell(cellnum++);
-				c.setCellValue(t.getBinAutozone());
-				
-				c = r.createCell(cellnum++);
-				c.setCellValue(t.getStackSize());
-				c.setCellStyle(sectionEnd);
-				
-				c = r.createCell(cellnum++);
-				c.setCellValue(t.getTotesScored());
-				
-				c = r.createCell(cellnum++);
-				c.setCellValue(t.getLitterScored());
-				
-				c = r.createCell(cellnum++);
-				c.setCellValue(t.getLitterStack());
-				
-				c = r.createCell(cellnum++);
-				c.setCellValue(t.getLitterLandfill());
-				
-				c = r.createCell(cellnum++);
-				c.setCellValue(t.getUnprocessedLitter());
-				
-				c = r.createCell(cellnum++);
-				c.setCellValue(t.getRecycleStack());
-				
-				c = r.createCell(cellnum++);
-				c.setCellValue(t.getCoopPlatform());
-				
-				c = r.createCell(cellnum++);
-				c.setCellValue(t.getCoopStack());
-				
-				c = r.createCell(cellnum++);
-				c.setCellValue(t.getTotesKnocked());
-				
-				c = r.createCell(cellnum++);
-				c.setCellValue(t.getCanNoodles());
-				
-				c = r.createCell(cellnum++);
-				c.setCellValue(t.getFouls());
-				
-				c = r.createCell(cellnum++);
-				c.setCellValue(t.getTelTotalPoints());
-				c.setCellStyle(sectionEnd);
-				
-				c = r.createCell(cellnum++);
-				c.setCellValue(t.getHumanFouls());
-				
-				c = r.createCell(cellnum++);
-				c.setCellValue(t.getHumanBins());
-				
-				c = r.createCell(cellnum++);
-				c.setCellValue(t.getHumanNoodlesOwn());
-				
-				c = r.createCell(cellnum++);
-				c.setCellValue(t.getHumanNoodlesOpponent());
-				
-				c = r.createCell(cellnum++);
-				c.setCellValue(t.getHumanNoodlesOther());
-				c.setCellStyle(sectionEnd);
-				
-				c = r.createCell(cellnum++);
-				c.setCellValue(t.getAutTotalScore());
-				
-				c = r.createCell(cellnum++);
-				c.setCellValue(t.getTelTotalScore());
-				
-				c = r.createCell(cellnum++);
-				c.setCellValue(t.getHumanTotalScore());
-				
-				c = r.createCell(cellnum++);
-				c.setCellValue(t.getAutTotalScore()+t.getTelTotalScore()+t.getHumanTotalScore());
-				c.setCellStyle(sectionEnd);
-				
-				rowNum++;
 			}
+				
+			rowNum++;
 		}
 		
 		write();

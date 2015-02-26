@@ -1,9 +1,19 @@
 package org.fullmetalfalcons;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import org.apache.commons.io.FilenameUtils;
+import org.fullmetalfalcons.data.DataPoint;
+import org.fullmetalfalcons.data.DataType;
+import org.fullmetalfalcons.teams.Team;
+import org.fullmetalfalcons.teams.TeamID;
 
 import com.dd.plist.NSDictionary;
 import com.dd.plist.NSObject;
@@ -21,12 +31,14 @@ public class ScoutingMain {
 
 	public static String directoryPath = null;
 
+	public static ArrayList<DataPoint> dataPoints = new ArrayList<>();
+	
 	private static boolean debug = true;
 	public static void main(String[] args) {
 		directoryPath = debug ? "Scout" : args[0] + "/";
 		TeamUtils.init();
-		Excel.init();
 		instance.init();
+		Excel.init();
 		Excel.export();
 	}
 
@@ -38,12 +50,34 @@ public class ScoutingMain {
 		if (directoryListing != null) {
 			for (File child : directoryListing) {
 				if (FilenameUtils.getExtension(child.getName()).equals("plist")) {
-					//System.out.println(child.getPath());
 					addFile(child);
 				}
 			}
 		} else {
 			System.out.println("failed to load directory... yea this is an issue... *insert sad face here*");
+		}
+		
+		try(InputStream fieldsIn = this.getClass().getResourceAsStream("/org/fullmetalfalcons/files/fields.csv");
+				BufferedReader fieldReader = new BufferedReader (new InputStreamReader(fieldsIn))){
+			
+			String line;
+			String[] info;
+			DataPoint dataPoint;
+			DataType dataType;
+			String[] data;
+			while((line=fieldReader.readLine())!=null){
+				info = line.split(",");
+				dataType = DataType.getDataType(info[2]);
+				dataPoint = new DataPoint(info[0],info[1],dataType);
+				if (info.length>3){
+					data = Arrays.copyOfRange(info,3,info.length);
+					dataPoint.setData(data);
+				}
+				dataPoints.add(dataPoint);
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -58,17 +92,10 @@ public class ScoutingMain {
 		
 		int number =Integer.parseInt(String.valueOf(keys.get(DictionaryKeys.KEY_TEAM_NUMBER)));
 		
-		//Dirty Dirty code
-		if (TeamUtils.TEAM_INFO.containsKey(number)){
-			Team oldTeam = TeamUtils.TEAM_INFO.get(number);
-			Team newTeam = new Team(oldTeam.getNumber(),oldTeam.getName(),oldTeam.getLocation());
-			newTeam.setKeys((HashMap<String, NSObject>)keys.toJavaObject());
-			TeamUtils.TEAMS.add(newTeam);
+		if (TeamUtils.TEAM_IDS.containsKey(number)){
+			TeamUtils.TEAMS.add(new Team(TeamUtils.TEAM_IDS.get(number),(HashMap<String, NSObject>) keys.toJavaObject()));
 		} else {
-			Team newTeam = new Team(number,null,null);
-			newTeam.setKeys((HashMap<String, NSObject>)keys.toJavaObject());
-			TeamUtils.TEAMS.add(newTeam);
-
+			TeamUtils.TEAMS.add(new Team(new TeamID(number,"unknown","unknown"),(HashMap<String,NSObject>) keys.toJavaObject()));
 		}
 		
 		System.out.println("Team " + number + " loaded successfully");

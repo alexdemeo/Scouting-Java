@@ -6,17 +6,20 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.fullmetalfalcons.teams.Team;
+import org.fullmetalfalcons.teams.TeamID;
+
 
 public class TeamUtils {
-	public static final HashMap<Integer,Team> TEAM_INFO = new HashMap<>();
+	public static final HashMap<Integer,TeamID> TEAM_IDS = new HashMap<>();
 	
 	public static final ArrayList<Team> TEAMS = new ArrayList<>();
 	
 	public static void init() {
-		teamDictionary();
+		loadTeamInfo();
 	}
 	
-	private static void teamDictionary() {
+	private static void loadTeamInfo() {
 		
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(TeamUtils.class.getResourceAsStream("/org/fullmetalfalcons/files/teams.txt")));
@@ -25,7 +28,7 @@ public class TeamUtils {
 			int counter = 0;
 			while (s!=null){
 				info = s.split(",");
-				TEAM_INFO.put(Integer.parseInt(info[0]), new Team(Integer.parseInt(info[0]),info[1],info[2]));
+				TEAM_IDS.put(Integer.parseInt(info[0]), new TeamID(Integer.parseInt(info[0]),info[1],info[2]));
 				s = br.readLine();
 				counter++;
 			}
