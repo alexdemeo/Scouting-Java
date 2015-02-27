@@ -21,7 +21,7 @@ Bins on the Field,human_bins,int,
 Noodles in Own Landfill,human_noodles_own,int,
 Noodles in Opponent Landfil,human_noodles_opp,int,
 !Noodles on Other Side,human_noodles_other_side,int,
-Auto Score,,math,
-Teleop Score,,math,
-Human Score,,math,
-!Overall Score,,math,
+Auto Score,aut_total_score,math,aut_yellow_totes_to_autozone*6+aut_stacks*20+aut_moves_bins_to_autozone*0.375
+Teleop Score,teleop_total_score,math,teleop_totes_scored*2+teleop_litterbins_scored*teleop_litterbins_highstack*4+teleop_littertolandfill+teleop_knocked_totesstacks*-4+teleop_coop_setsonplatform*20+teleop_coop_attemptmake*40
+Human Score,human_total_score,math,human_noodles_own*4+human_noodles_opp*4+human_noodles_other_side*4+human_bins*2+human_fouls*-6
+!Overall Score,total_score,math,aut_total_score+teleop_total_score+human_total_score

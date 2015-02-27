@@ -11,14 +11,24 @@ import org.fullmetalfalcons.teams.TeamID;
 
 
 public class TeamUtils {
+	
+	/**
+	 * List of Generic TeamIDs containing a predefined List of 
+	 */
 	public static final HashMap<Integer,TeamID> TEAM_IDS = new HashMap<>();
 	
 	public static final ArrayList<Team> TEAMS = new ArrayList<>();
 	
+	/**
+	 * Literally just calls a private method that loads the team names
+	 */
 	public static void init() {
 		loadTeamInfo();
 	}
 	
+	/**
+	 * Loads teams.txt and compiles a list of team names,numbers,and locations
+	 */
 	private static void loadTeamInfo() {
 		
 		try {

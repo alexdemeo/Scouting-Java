@@ -38,9 +38,8 @@ public class Excel {
 	 * Iterates along the headers and when it reaches one that starts with an !, it retroactively adds the next section in the 
 	 * cells above it
 	 * 
-	 * Don't touch
 	 * 
-	 * Seriously don't touch it
+	 * Here be dragons
 	 */
 	public static void setupWorkbook(){
 		workbook = new XSSFWorkbook();

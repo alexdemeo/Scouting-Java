@@ -30,4 +30,10 @@ public class Team {
 	public String getDataAt(String s){
 		return String.valueOf(data.get(s));
 	}
+	
+	public void putDataAt(String s, NSObject o){
+		System.out.println(s);
+		System.out.println(String.valueOf(o));
+		data.put(s, o);
+	}
 }

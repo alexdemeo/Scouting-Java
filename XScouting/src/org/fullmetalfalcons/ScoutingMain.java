@@ -90,7 +90,7 @@ public class ScoutingMain {
 			e.printStackTrace();
 		}
 		
-		int number =Integer.parseInt(String.valueOf(keys.get(DictionaryKeys.KEY_TEAM_NUMBER)));
+		int number =Integer.parseInt(String.valueOf(keys.get("team_number")));
 		
 		if (TeamUtils.TEAM_IDS.containsKey(number)){
 			TeamUtils.TEAMS.add(new Team(TeamUtils.TEAM_IDS.get(number),(HashMap<String, NSObject>) keys.toJavaObject()));
